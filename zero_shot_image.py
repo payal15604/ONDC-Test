@@ -7,7 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/1qoWBOSC0GFWrv2JRJSvDvaKqpD4ok1xR
 """
 
-!pip install git+https://github.com/PrithivirajDamodaran/ZSIC.git
+#!pip install git+https://github.com/PrithivirajDamodaran/ZSIC.git
 from ZSIC import ZeroShotImageClassification
 
 zsic = ZeroShotImageClassification()
