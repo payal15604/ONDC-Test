@@ -7,7 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/19BhwNrrDr89YIYfccGOCQuL-OVWp7-xV
 """
 
-!pip install transformers -U
+#!pip install transformers -U
 
 import numpy as np
 import tensorflow as tf
