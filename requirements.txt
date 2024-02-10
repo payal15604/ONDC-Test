@@ -1,14 +1,13 @@
-Input:
-(in the same order)
-Name:
-Long Description:
-Short Description:
-Image:
-Symbol:
-Labels: 
-
-How to Use:
-1) from Main.py call topsis(name, long_disc, short disc, image, symbol, labels)
-2) return value is overall score of the catalog
-
+tensorflow
+transformers -U
+pipeline
+AutoTokenizer
+AutoModelForSequenceClassification
+T5ForConditionalGeneration
+spacy
+NLTK
+git+https://github.com/PrithivirajDamodaran/ZSIC.git
+ZSIC
+pyDecision
+numpy
 
