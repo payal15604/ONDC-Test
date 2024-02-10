@@ -24,13 +24,65 @@ import numpy as np
 
 """JSON FILE WILL COME"""
 
-name = 'tea'
-short_disc = ''' Tea is good, Tea rocks'''
-long_disc = ''' I was dumb, but when I drank tea, I am smart'''
-image = ['https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.u5BokL9W-qoVKqen_Pju7wHaFY%26pid%3DApi&f=1&ipt=d6f1e258996814c5013dc823a3ea725e2c85fb06a357ff09c4f670d0cb44106a&ipo=images', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.x4pndexpA3VoHKj7mvyOWgHaFj%26pid%3DApi&f=1&ipt=b356824b206d99c5494053b723477de6bbe55d6dd6424d3f182dcf7461fddf23&ipo=images']
-symbol = 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.u5BokL9W-qoVKqen_Pju7wHaFY%26pid%3DApi&f=1&ipt=d6f1e258996814c5013dc823a3ea725e2c85fb06a357ff09c4f670d0cb44106a&ipo=images'
+import json
+import requests
 
-labels = ['coffee','tea','shampoo']
+# Define the URL of your API endpoint
+url = "http://localhost:4500/api/datasender"
+
+def parse_json(json_data):
+    try:
+        # Convert boolean literals to uppercase
+        json_data = json_data.replace("true", "True").replace("false", "False")
+        # Parse JSON data
+        parsed_json = json.loads(json_data)
+        return parsed_json
+    except json.JSONDecodeError:
+        print("Error: Invalid JSON data")
+        return None
+
+try:
+    # Send a POST request to the API endpoint
+    response = requests.post(url)
+
+    # Check if the request was successful (status code 200)
+    if response.status_code == 200:
+        # Extract the JSON data from the response
+        received_data = response.text
+
+        # Parse the JSON data
+        parsed_data = parse_json(received_data)
+
+        if parsed_data:
+            # Process each received item
+            for item in parsed_data.get("Received data", []):
+                # Accessing fields from the item
+                name = item.get("name", "")
+                short_disc = item.get("short_desc", "")
+                long_disc = item.get("long_desc", "")
+                image = item.get("images", [])
+                symbol = item.get("symbol", "")
+                
+                # Example: Print the fields of each item
+                print("Name:", name)
+                print("Short Description:", short_disc)
+                print("Long Description:", long_disc)
+                print("Images:", image)
+                print("Symbol:", symbol)
+
+                # TODO: Process the fields in your ML model
+
+        else:
+            print("Error: Failed to parse JSON data")
+
+    else:
+        # Handle the case where the request was not successful
+        print("Error: Failed to fetch data from the API. Status code:", response.status_code)
+
+except Exception as e:
+    # Handle any exceptions that occur during the request
+    print("Error:", e)
+labels = ['coffee','tea','shampoo','face serum','bread','honey','soap','biscuit','milk','chocolate','juice']
 
 result = ztext(name, labels)
 
