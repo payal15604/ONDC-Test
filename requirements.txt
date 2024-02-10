@@ -1,13 +1,9 @@
 tensorflow
-transformers -U
+transformers 
 pipeline
-AutoTokenizer
-AutoModelForSequenceClassification
-T5ForConditionalGeneration
 spacy
 NLTK
 git+https://github.com/PrithivirajDamodaran/ZSIC.git
-ZSIC
 pyDecision
 numpy
 
